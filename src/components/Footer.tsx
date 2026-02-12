@@ -24,6 +24,7 @@ export default function Footer() {
               <li><Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
               <li><Link to="/doctors" className="text-sm text-muted-foreground hover:text-primary transition-colors">Find Doctors</Link></li>
               <li><Link to="/dashboard" className="text-sm text-muted-foreground hover:text-primary transition-colors">My Appointments</Link></li>
+              <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">For Doctors</Link></li>
             </ul>
           </div>
 

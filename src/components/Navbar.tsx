@@ -43,6 +43,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Home</Link>
             <Link to="/doctors" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Doctors</Link>
+            <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">For Doctors</Link>
             {isAuthenticated && (
               <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</Link>
             )}
@@ -86,6 +87,7 @@ export default function Navbar() {
           <div className="container-custom py-4 space-y-3">
             <Link to="/" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>Home</Link>
             <Link to="/doctors" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>Doctors</Link>
+            <Link to="/contact" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>For Doctors</Link>
             {isAuthenticated && (
               <Link to="/dashboard" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>Dashboard</Link>
             )}
