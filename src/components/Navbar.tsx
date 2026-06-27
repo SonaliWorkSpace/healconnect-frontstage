@@ -22,10 +22,11 @@ export default function Navbar() {
     setDark(!dark);
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
+const handleLogout = async () => {
+  await logout();
+  navigate("/");
+};
+
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -41,11 +42,13 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Home</Link>
-            <Link to="/doctors" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Doctors</Link>
-            <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">For Doctors</Link>
+            <Link to="/" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Home</Link>
+            <Link to="/doctors" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Doctors</Link>
+            <Link to="/contact" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Join Us</Link>
+            <Link to="/pricing" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Pricing</Link>
+             <Link to="/dashboard" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Dashboard</Link>
             {isAuthenticated && (
-              <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</Link>
+              <Link to="/dashboard" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Dashboard</Link>
             )}
           </div>
 
@@ -53,17 +56,22 @@ export default function Navbar() {
             <Button variant="ghost" size="icon" onClick={toggleDark} className="rounded-full">
               {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            {isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                <Link to="/dashboard" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                  <User className="w-4 h-4" />
-                  {user?.name}
-                </Link>
-                <Button variant="outline" size="sm" onClick={handleLogout}>
-                  <LogOut className="w-4 h-4 mr-1" /> Logout
-                </Button>
-              </div>
-            ) : (
+           {isAuthenticated ? (
+  <div className="flex items-center gap-3">
+    <Link
+      to="/dashboard"
+      className="flex items-center gap-2 text-sm font-medium text-foreground"
+    >
+      <User className="w-4 h-4" />
+      {user?.displayName || user?.email}
+    </Link>
+
+    <Button variant="outline" size="sm" onClick={handleLogout}>
+      <LogOut className="w-4 h-4 mr-1" /> Logout
+    </Button>
+  </div>
+) : (
+
               <>
                 <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>Login</Button>
                 <Button size="sm" onClick={() => navigate("/signup")}>Sign Up</Button>
@@ -85,11 +93,12 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-card border-b border-border animate-fade-in">
           <div className="container-custom py-4 space-y-3">
-            <Link to="/" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>Home</Link>
-            <Link to="/doctors" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>Doctors</Link>
-            <Link to="/contact" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>For Doctors</Link>
+            <Link to="/" className="block text-sm font-bold text-foreground py-2" onClick={() => setIsOpen(false)}>Home</Link>
+            <Link to="/doctors" className="block text-sm font-bold text-foreground py-2" onClick={() => setIsOpen(false)}>Doctors</Link>
+            <Link to="/contact" className="block text-sm font-bold text-foreground py-2" onClick={() => setIsOpen(false)}>Join Us</Link>
+            <Link to="/pricing" className="block text-sm font-bold text-foreground py-2" onClick={() => setIsOpen(false)}>Pricing</Link>
             {isAuthenticated && (
-              <Link to="/dashboard" className="block text-sm font-medium text-foreground py-2" onClick={() => setIsOpen(false)}>Dashboard</Link>
+              <Link to="/dashboard" className="block text-sm font-bold text-foreground py-2" onClick={() => setIsOpen(false)}>Dashboard</Link>
             )}
             <div className="pt-2 border-t border-border space-y-2">
               {isAuthenticated ? (

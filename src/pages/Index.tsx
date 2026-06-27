@@ -42,7 +42,7 @@ export default function Index() {
                 Book Trusted Doctors{" "}
                 <span className="gradient-text">in Minutes</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-lg">
+              <p className="text-lg text-foreground max-w-lg">
                 Consult experienced specialists from the comfort of your home. Easy booking, verified doctors, and quality healthcare at your fingertips.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -92,8 +92,8 @@ export default function Index() {
                   <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="font-medium text-sm text-foreground">{cat.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">{cat.count} doctors</p>
+                  <h3 className="font-bold text-sm text-foreground">{cat.name}</h3>
+                  {/* <p className="text-xs text-muted-foreground mt-1">{cat.count} doctors</p> */}
                 </Link>
               );
             })}
@@ -140,7 +140,7 @@ export default function Index() {
                     <Star key={j} className={`w-4 h-4 ${j < t.rating ? "fill-warning text-warning" : "text-muted"}`} />
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">"{t.comment}"</p>
+                <p className="text-sm text-foreground mb-4 leading-relaxed">"{t.comment}"</p>
                 <div className="flex items-center gap-3">
                   <img src={t.image} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
                   <div>
@@ -168,11 +168,11 @@ export default function Index() {
                   className="w-full text-left px-6 py-4 flex items-center justify-between"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
-                  <span className="font-medium text-foreground">{faq.question}</span>
-                  {openFaq === i ? <ChevronUp className="w-5 h-5 text-muted-foreground" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" />}
+                  <span className="font-bold text-foreground">{faq.question}</span>
+                  {openFaq === i ? <ChevronUp className="w-5 h-5 text-foreground" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" />}
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-4 text-sm text-muted-foreground animate-fade-in">{faq.answer}</div>
+                  <div className="px-6 pb-4 text-sm font-medium text-foreground animate-fade-in">{faq.answer}</div>
                 )}
               </div>
             ))}

@@ -40,7 +40,7 @@ export default function Doctors() {
         <div className="container-custom">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2">Find Your Doctor</h1>
-            <p className="text-muted-foreground">Browse our verified specialists and book an appointment</p>
+            <p className="text-foreground">Browse our verified specialists and book an appointment</p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-6">

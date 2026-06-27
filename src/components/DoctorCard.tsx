@@ -44,16 +44,16 @@ export default function DoctorCard({ doctor }: Props) {
 
       <div className="space-y-2 mb-4">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">{doctor.experience}+ years exp.</span>
+          <span className="text-foreground">{doctor.experience}+ years exp.</span>
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-warning text-warning" />
             <span className="font-medium text-foreground">{doctor.rating}</span>
-            <span className="text-muted-foreground">({doctor.reviews})</span>
+            <span className="text-foreground">({doctor.reviews})</span>
           </div>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">{doctor.location}</span>
-          <span className="font-semibold text-foreground">₹{doctor.fee}</span>
+          <span className="font-semibold text-foreground">{doctor.location}</span>
+          <span className="font-bold text-foreground">₹{doctor.fee}</span>
         </div>
       </div>
 

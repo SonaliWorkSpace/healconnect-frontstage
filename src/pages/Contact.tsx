@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const specializations = ["General Physician", "Dermatologist", "Cardiologist", "Pediatrician", "Orthopedic", "Neurologist", "Other"];
 
@@ -24,19 +25,42 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.specialization || !form.message) {
-      toast({ title: "Please fill all required fields", variant: "destructive" });
-      return;
-    }
-    // Save to localStorage as mock
-    const requests = JSON.parse(localStorage.getItem("healconnect_contact_requests") || "[]");
-    requests.push({ ...form, id: crypto.randomUUID(), date: new Date().toISOString() });
-    localStorage.setItem("healconnect_contact_requests", JSON.stringify(requests));
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!form.name || !form.email || !form.specialization || !form.message) {
+    toast({ title: "Please fill all required fields", variant: "destructive" });
+    return;
+  }
+
+  try {
+    await emailjs.send(
+      "service_qay6imw",
+      "template_3urq7xm",
+      {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        specialization: form.specialization,
+        experience: form.experience,
+        clinic: form.clinic,
+        message: form.message,
+      },
+      "gl9OJJUSoKJFeFWNU"
+    );
+
     setSubmitted(true);
     toast({ title: "Request submitted successfully!" });
-  };
+
+  } catch (error) {
+    toast({
+      title: "Something went wrong!",
+      description: "Please try again later.",
+      variant: "destructive",
+    });
+  }
+};
+
 
   const update = (key: string, value: string) => setForm(f => ({ ...f, [key]: value }));
 
@@ -47,10 +71,10 @@ export default function Contact() {
         <div className="container-custom max-w-5xl">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-medium px-4 py-1.5 rounded-full mb-4">
-              <Stethoscope className="w-4 h-4" /> For Doctors
+              <Stethoscope className="w-4 h-4" /> JOIN US
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Join HealConnect</h1>
-            <p className="text-muted-foreground max-w-lg mx-auto">
+            <p className="text-foreground max-w-lg mx-auto">
               Are you a doctor looking to expand your practice? Fill out the form below and our team will set up your profile.
             </p>
           </div>
@@ -59,8 +83,8 @@ export default function Contact() {
             {/* Info sidebar */}
             <div className="md:col-span-2 space-y-6">
               <div className="bg-card rounded-xl border border-border p-6 space-y-5">
-                <h3 className="font-semibold text-foreground">Why join us?</h3>
-                <ul className="space-y-4 text-sm text-muted-foreground">
+                <h3 className="font-bold text-foreground">Why join us?</h3>
+                <ul className=" space-y-4 text-sm text-foreground">
                   {[
                     "Reach thousands of patients online",
                     "Manage appointments effortlessly",
@@ -77,12 +101,12 @@ export default function Contact() {
               </div>
 
               <div className="bg-card rounded-xl border border-border p-6 space-y-3">
-                <h3 className="font-semibold text-foreground">Contact Info</h3>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <h3 className="font-bold text-foreground">Contact Info</h3>
+                <div className="flex items-center gap-2 text-sm text-foreground">
                   <Mail className="w-4 h-4 text-primary" /> doctors@healconnect.com
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Phone className="w-4 h-4 text-primary" /> +1 (555) 987-6543
+                <div className="flex items-center gap-2 text-sm text-foreground">
+                  <Phone className="w-4 h-4 text-primary" /> 8673546782, 9652974643
                 </div>
               </div>
             </div>
@@ -104,24 +128,24 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="bg-card rounded-2xl border border-border p-6 md:p-8 space-y-5 shadow-sm">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <Label htmlFor="name">Full Name *</Label>
+                  <div className="grid sm:grid-cols-2 gap-4 ">
+                    <div className="space-y-1  ">
+                      <Label htmlFor="name" className="font-bold">Full Name *</Label>
                       <Input id="name" value={form.name} onChange={e => update("name", e.target.value)} placeholder="Dr. John Smith" />
                     </div>
                     <div className="space-y-1">
-                      <Label htmlFor="email">Email *</Label>
+                      <Label htmlFor="email" className="font-bold">Email *</Label>
                       <Input id="email" type="email" value={form.email} onChange={e => update("email", e.target.value)} placeholder="doctor@example.com" />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <Label htmlFor="phone">Phone Number</Label>
+                      <Label htmlFor="phone" className="font-bold">Phone Number</Label>
                       <Input id="phone" value={form.phone} onChange={e => update("phone", e.target.value)} placeholder="+1 555 0000" />
                     </div>
                     <div className="space-y-1">
-                      <Label>Specialization *</Label>
+                      <Label className="font-bold">Specialization *</Label>
                       <Select value={form.specialization} onValueChange={v => update("specialization", v)}>
                         <SelectTrigger><SelectValue placeholder="Select specialization" /></SelectTrigger>
                         <SelectContent className="bg-popover border border-border z-50">
@@ -133,11 +157,11 @@ export default function Contact() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <Label htmlFor="experience">Years of Experience</Label>
+                      <Label htmlFor="experience" className="font-bold">Years of Experience</Label>
                       <Input id="experience" type="number" value={form.experience} onChange={e => update("experience", e.target.value)} placeholder="10" />
                     </div>
                     <div className="space-y-1">
-                      <Label htmlFor="clinic">Clinic / Hospital</Label>
+                      <Label htmlFor="clinic" className="font-bold">Clinic / Hospital</Label>
                       <div className="relative">
                         <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                         <Input id="clinic" className="pl-9" value={form.clinic} onChange={e => update("clinic", e.target.value)} placeholder="ABC Medical Center" />
@@ -146,7 +170,7 @@ export default function Contact() {
                   </div>
 
                   <div className="space-y-1">
-                    <Label htmlFor="message">Tell us about yourself *</Label>
+                    <Label htmlFor="message" className="font-bold">Tell us about yourself *</Label>
                     <Textarea
                       id="message"
                       rows={4}
