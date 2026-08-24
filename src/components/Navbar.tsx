@@ -46,7 +46,6 @@ const handleLogout = async () => {
             <Link to="/doctors" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Doctors</Link>
             <Link to="/contact" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Join Us</Link>
             <Link to="/pricing" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Pricing</Link>
-             <Link to="/dashboard" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Dashboard</Link>
             {isAuthenticated && (
               <Link to="/dashboard" className="text-sm font-bold text-foreground hover:text-foreground transition-colors">Dashboard</Link>
             )}

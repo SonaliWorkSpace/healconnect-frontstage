@@ -11,9 +11,9 @@ import DoctorProfile from "./pages/DoctorProfile";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Pricing from "./pages/Pricing";
 import Payment from "./pages/Payment";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import MeetingRoom from "./pages/MeetingRoom";
@@ -34,10 +34,9 @@ const App = () => (
             <Route path="/doctors" element={<Doctors />} />
             <Route path="/doctor/:id" element={<DoctorProfile />} />
             <Route path="/contact" element={<Contact />} />
-    
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/login" element={<Login />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/payment-success" element={<PaymentConfirmation />} />
             <Route path="/meeting/:id" element={<MeetingRoom />} />
