@@ -128,8 +128,11 @@ export default function Payment() {
           planId: plan.id,
           planName: plan.name,
           amount: plan.price,
+          paymentId: response.razorpay_payment_id,
           razorpayPaymentId: response.razorpay_payment_id,
+          orderId: response.razorpay_order_id,
           razorpayOrderId: response.razorpay_order_id,
+          signature: response.razorpay_signature,
           razorpaySignature: response.razorpay_signature,
           completedAt: new Date().toISOString(),
         };
